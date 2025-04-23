@@ -1,19 +1,12 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-// These environment variables are managed by Lovable's Supabase integration
-const supabaseUrl = (window as any).env?.VITE_SUPABASE_URL || 'https://placeholder-url.supabase.co';
-const supabaseAnonKey = (window as any).env?.VITE_SUPABASE_ANON_KEY || 'placeholder-key';
+// These values come from your Supabase project
+const supabaseUrl = 'https://ikicjkohcjieudvdhtxg.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlraWNqa29oY2ppZXVkdmRodHhnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDYzNDYsImV4cCI6MjA2MDk4MjM0Nn0.Go9vcfPIkbOBfdB7op4GOqFLsoDr-1P_dxUjFaXdFmE';
 
-// Check if Supabase is properly configured
-const isSupabaseConfigured = !!(window as any).env?.VITE_SUPABASE_URL && !!(window as any).env?.VITE_SUPABASE_ANON_KEY;
-
-if (!isSupabaseConfigured) {
-  console.error('Missing Supabase environment variables. Make sure you have connected your project to Supabase through Lovable\'s integration.');
-}
-
-// Create client with fallback values to prevent runtime errors
+// Create the Supabase client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Helper function to check if Supabase is properly configured
-export const isSupabaseReady = () => isSupabaseConfigured;
+export const isSupabaseReady = () => true;

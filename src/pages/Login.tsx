@@ -3,7 +3,7 @@ import { useState } from "react";
 import { supabase, isSupabaseReady } from "../lib/supabaseClient";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { FormLabel } from "@/components/ui/form";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
@@ -61,10 +61,11 @@ const Login = () => {
         
         <div className="space-y-4">
           <div>
-            <FormLabel>Email</FormLabel>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <Input
               type="email"
               name="email"
+              id="email"
               value={form.email}
               onChange={handleChange}
               autoComplete="email"
@@ -74,10 +75,11 @@ const Login = () => {
           </div>
           
           <div>
-            <FormLabel>Password</FormLabel>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
             <Input
               type="password"
               name="password"
+              id="password"
               value={form.password}
               onChange={handleChange}
               autoComplete="current-password"
