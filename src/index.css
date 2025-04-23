@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -13,41 +13,34 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 187 91% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 355 100% 70%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 262 55% 55%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 187 91% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +89,54 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom styles for the fitness app */
+  .app-container {
+    @apply max-w-lg mx-auto min-h-screen bg-fitness-background relative;
+  }
+
+  /* Card styles */
+  .fitness-card {
+    @apply bg-fitness-card rounded-2xl p-4 shadow-sm border border-gray-100;
+  }
+
+  /* Progress ring styles */
+  .progress-ring {
+    @apply transition-all duration-300 ease-in-out;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  /* Button styles */
+  .fitness-btn {
+    @apply rounded-full font-medium transition-all duration-200;
+  }
+
+  .fitness-btn-primary {
+    @apply bg-fitness-primary text-white hover:bg-fitness-primary/90 active:scale-95;
+  }
+
+  .fitness-btn-secondary {
+    @apply bg-fitness-secondary text-white hover:bg-fitness-secondary/90 active:scale-95;
+  }
+
+  /* Bottom navigation bar */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 flex justify-around py-2 bg-white border-t border-gray-100 z-50 shadow-sm;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center justify-center p-2 rounded-lg transition-colors;
+  }
+
+  .nav-item.active {
+    @apply text-fitness-primary;
+  }
+
+  /* Animations */
+  .animate-enter {
+    @apply animate-scale-in;
   }
 }
