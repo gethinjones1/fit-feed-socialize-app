@@ -1,10 +1,12 @@
 
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase, isSupabaseReady } from "../lib/supabaseClient";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Link, useNavigate } from "react-router-dom";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertTriangle } from "lucide-react";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +21,12 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError("");
+    
+    if (!isSupabaseReady()) {
+      setFormError("Authentication is not available. Please connect this project to Supabase.");
+      return;
+    }
+    
     setLoading(true);
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -41,6 +49,15 @@ const Login = () => {
         className="bg-white/90 shadow-xl rounded-2xl p-8 w-full max-w-md glass"
       >
         <h2 className="text-2xl font-semibold text-center mb-8 text-primary">Log In</h2>
+        
+        {!isSupabaseReady() && (
+          <Alert className="mb-6 border-amber-500 bg-amber-50">
+            <AlertTriangle className="h-4 w-4 text-amber-500 mr-2" />
+            <AlertDescription className="text-amber-700">
+              This project is not connected to Supabase. Authentication will not work until you connect it.
+            </AlertDescription>
+          </Alert>
+        )}
         
         <div className="space-y-4">
           <div>
@@ -73,7 +90,7 @@ const Login = () => {
         <Button 
           className="w-full mt-6"
           type="submit"
-          disabled={loading}
+          disabled={loading || !isSupabaseReady()}
         >
           {loading ? "Logging in..." : "Log In"}
         </Button>
